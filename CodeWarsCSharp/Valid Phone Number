@@ -1,0 +1,19 @@
+using System;
+
+public static class Kata
+{
+  public static bool ValidPhoneNumber(string phoneNumber)
+  {
+            char[] a = phoneNumber.ToCharArray();            
+            char[] b = { a[1], a[2], a[3], a[6], a[7], a[8], a[10], a[11], a[12] };
+            foreach (char c in b)
+            {   if (Char.IsNumber(c)!=true) return false;   }
+            if (phoneNumber.Length != 14) return false;
+            if (a[0] != '(') return false;
+            if (a[4] != ')') return false;
+            if (a[5] != ' ') return false;
+            if (a[9] != '-') return false;
+          
+            else return true;
+  }
+}
