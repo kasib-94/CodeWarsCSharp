@@ -1,0 +1,58 @@
+using System;
+using System.Linq;
+using System.Collections.Generic;
+
+public class HumanTimeFormat
+{
+    public static string formatDuration(int seconds)
+    {
+        var dict = new Dictionary<string, int>();
+        string[] separators = { ", ", " and " };
+        if (seconds == 0) return "now";
+        if (seconds / 31536000 >= 1)
+        {
+            dict.Add("years", seconds / 31536000);
+            seconds = seconds % 31536000;
+        }
+
+        if (seconds / 86400 >= 1)
+        {
+            dict.Add("days", seconds / 86400);
+            seconds = seconds % 86400;
+        }
+
+        if (seconds / 3600 >= 1)
+        {
+            dict.Add("hours", seconds / 3600);
+            seconds = seconds % 3600;
+        }
+
+        if (seconds / 60 >= 1)
+        {
+            dict.Add("minutes", seconds / 60);
+            seconds = seconds % 60;
+        }
+
+        if (seconds / 1 >= 1) dict.Add("seconds", seconds / 1);
+
+        var result = "";
+
+        for (var i = 0; i < dict.Count; i++)
+        {
+            var element = dict.ElementAt(i);
+            var xd = element.Value + " ";
+            result += element.Value + " ";
+            if (element.Value == 1)
+                result += element.Key.Remove(element.Key.Length - 1, 1);
+            else
+                result += element.Key;
+
+            if (i == dict.Count- 1) continue;
+            if (i != dict.Count - 2)
+                result += separators[0];
+            else if (i == dict.Count - 2) result += separators[1];
+        }
+
+        return result;
+    }
+}
