@@ -1,0 +1,36 @@
+using System.Collections.Generic;
+using System.Linq;
+using System;
+
+public class Kata
+{
+  public static string SpinWords(string sentence)
+  {
+       List<string> list = sentence.Split(" ").ToList();
+            sentence = "";
+            for (int i=0; i<list.Count ; i++)
+            {
+                
+                if (list[i].Length>=5)
+                {
+                    char[] charArray = list[i].ToCharArray();
+                    Array.Reverse(charArray);
+                    if (i!=0)
+                    {
+                        sentence += " ";
+                    }
+                    sentence += new string(charArray);
+                }
+                else
+                {
+                    if (i!=0)
+                    {
+                        sentence += " ";
+                    }
+                    sentence += list[i];
+                }
+            }
+
+            return sentence;
+  }
+}
