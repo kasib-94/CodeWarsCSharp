@@ -1,0 +1,83 @@
+using System.Collections.Generic;
+using System.Linq;
+
+public class Kata
+        {
+            public static List<string> GetPINs(string observed)
+            {
+                var dict = new Dictionary<int, List<int>>
+                {
+                    { 0, new List<int> { 8, 0 } },
+                    { 1, new List<int> { 2, 4, 1 } },
+                    { 2, new List<int> { 1, 5, 3, 2 } },
+                    { 3, new List<int> { 2, 6, 3 } },
+                    { 4, new List<int> { 1, 5, 7, 4 } },
+                    { 5, new List<int> { 2, 4, 6, 8, 5 } },
+                    { 6, new List<int> { 3, 5, 9, 6 } },
+                    { 7, new List<int> { 4, 8, 7 } },
+                    { 8, new List<int> { 5, 7, 9, 0, 8 } },
+                    { 9, new List<int> { 9,8,6 } }
+                };
+                var numbers = new List<List<int>>();
+                foreach (var letter in observed.ToCharArray().ToList())
+                    numbers.Add(dict.FirstOrDefault(x => x.Key == int.Parse(letter.ToString())).Value);
+
+                List<string> result = new();
+                var pin = new int[observed.Length];
+                for (var i = 0; i < numbers[0].Count; i++)
+                {
+                    pin[0] = numbers[0][i];
+                    if (observed.Length > 1)
+                        for (var j = 0; j < numbers[1].Count; j++)
+                        {
+                            pin[1] = numbers[1][j];
+                            if (observed.Length > 2)
+                                for (var k = 0; k < numbers[2].Count; k++)
+                                {
+                                    pin[2] = numbers[2][k];
+                                    if (observed.Length > 3)
+                                        for (var l = 0; l < numbers[3].Count; l++)
+                                        {
+                                            pin[3] = numbers[3][l];
+                                            if (observed.Length > 4)
+                                                for (var e = 0; e < numbers[4].Count; e++)
+                                                {
+                                                    pin[4] = numbers[4][e];
+                                                    if (observed.Length > 5)
+                                                        for (var q = 0; q < numbers[5].Count; q++)
+                                                        {
+                                                            pin[5] = numbers[5][q];
+                                                            if (observed.Length > 6)
+                                                                for (var b = 0; b < numbers[6].Count; b++)
+                                                                {
+                                                                    pin[6] = numbers[6][b];
+                                                                    if (observed.Length > 7)
+                                                                        for (var f = 0; f < numbers[7].Count; f++)
+                                                                        {
+                                                                            pin[7] = numbers[7][f];
+                                                    
+                                                                            if (observed.Length == 8) result.Add(string.Join("", pin));  
+                                                                        }
+                                                                    if (observed.Length == 7) result.Add(string.Join("", pin));  
+                                                                }
+                                                            if (observed.Length == 6) result.Add(string.Join("", pin));  
+                                                        }
+                                                    if (observed.Length == 5) result.Add(string.Join("", pin));  
+                                                }
+
+                                            if (observed.Length == 4) result.Add(string.Join("", pin));  
+                                          
+                                        }
+
+                                    if (observed.Length == 3) result.Add(string.Join("", pin));
+                                }
+
+                            if (observed.Length == 2) result.Add(string.Join("", pin));
+                        }
+
+                    if (observed.Length == 1) result.Add(string.Join("", pin));
+                }
+
+                return result;
+            }
+        }
