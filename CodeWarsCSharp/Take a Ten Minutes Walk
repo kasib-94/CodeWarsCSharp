@@ -1,0 +1,28 @@
+using System;
+
+public class Kata
+{
+  public static bool IsValidWalk(string[] walk)
+    {
+         if (walk.Length != 10)
+        {
+            return false;
+        }
+        var x = 0;
+        var y = 0;
+        foreach (var item in walk)
+        {
+            if (item == "n") y++;
+            if (item == "s") y--;
+            if (item == "e") x--;
+            if (item == "w") x++;
+        }
+
+        if (  x == 0 && y == 0 )
+        {
+            return true;
+        }
+
+        return false;
+    }
+}
