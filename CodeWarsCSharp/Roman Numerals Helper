@@ -1,0 +1,85 @@
+ using System;
+using System.Collections.Generic;
+using System.Linq;
+
+public class RomanNumerals
+        {
+            private static readonly Dictionary<char, int> myDict = new()
+            {
+                { 'I', 1 },
+                { 'V', 5 },
+                { 'X', 10 },
+                { 'L', 50 },
+                { 'C', 100 },
+                { 'D', 500 },
+                { 'M', 1000 }
+            };
+
+            private static readonly Dictionary<string, int> myDict2 = new()
+            {
+                { "M", 1000 },
+                { "CM", 900 },
+                { "D", 500 },
+                { "CD", 400 },
+                { "C", 100 },
+                { "XC", 90 },
+                { "L", 50 },
+                { "XL", 40 },
+                { "X", 10 },
+                { "IX", 9 },
+                { "V", 5 },
+                { "IV", 4 },
+                { "I", 1 }
+            };
+
+
+            public static string ToRoman(int n)
+            {
+                var s = "";
+                var numbers = myDict2.Values.ToList();
+
+                for (var i = 0; i < numbers.Count; i++)
+                    while (n / numbers[i] >= 1)
+                    {
+                        n = n - numbers[i];
+                        s += myDict2.FirstOrDefault(x => x.Value == numbers[i]).Key;
+                    }
+
+                return s;
+            }
+
+            public static int FromRoman(string romanNumeral)
+            {
+                //    myDict.Keys.ToList().IndexOf(chars[i])
+
+
+                var total = 0;
+                var chars = romanNumeral.ToList();
+                for (var i = 0; i < chars.Count; i++)
+                    if (i != chars.Count - 1 && chars.Count!=1 )
+                    {
+                        if (myDict.Keys.ToList().IndexOf(chars[i]) >= myDict.Keys.ToList().IndexOf(chars[i + 1]))
+                            total += myDict.FirstOrDefault(x => x.Key == chars[i]).Value;
+
+                        if (myDict.Keys.ToList().IndexOf(chars[i]) < myDict.Keys.ToList().IndexOf(chars[i + 1]))
+                        {
+                            total += myDict.FirstOrDefault(x => x.Key == chars[i + 1]).Value -
+                                     myDict.FirstOrDefault(x => x.Key == chars[i]).Value;
+                            i++;
+                        }
+                    }
+                    else
+                    {
+                        if (chars.Count==1)
+                        {
+                            return myDict.FirstOrDefault(x => x.Key == chars[i]).Value;
+                        }
+                        if (myDict.Keys.ToList().IndexOf(chars[i]) <= myDict.Keys.ToList().IndexOf(chars[i - 1]))
+                            total += myDict.FirstOrDefault(x => x.Key == chars[i]).Value;
+                        else
+                            total -= myDict.FirstOrDefault(x => x.Key == chars[i]).Value;
+                    }
+
+                return total;
+            }
+        }
