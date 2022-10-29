@@ -1,0 +1,43 @@
+using System;
+using System.Collections.Generic;
+using System.Linq;
+namespace EncryptThis
+{
+    public class Kata
+    {
+        public static string EncryptThis(string input)
+        {
+             List<string> vs = new List<string>();
+            List<string> final = new List<string>();
+            input.Split(" ").ToList<string>().ForEach(x => vs.Add(x));
+            foreach (string s in vs)
+            {
+                string w;
+                if (s.Length==2)
+                {
+                    w = ((int)s[0]).ToString() + s[1];
+                }
+                else if (s.Length==1)
+                {
+                    w = ((int)s[0]).ToString();
+                }
+                else if (s.Length == 0)
+                {
+                    w = "";
+                }
+                else
+                {
+                    w = ((int)s[0]).ToString() + s[s.Length-1] + s[2..^1] + s[1];
+                }
+                 
+                final.Add(w);
+
+
+            }
+
+
+            Console.WriteLine(String.Join(" ", final));
+            return String.Join(" ", final);
+        }
+    }
+}
