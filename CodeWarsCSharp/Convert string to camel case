@@ -1,0 +1,23 @@
+ using System;
+using System.Linq;
+
+public class Kata
+{
+ public static string ToCamelCase(string str)
+        {
+           char[] arr = str.ToLower().ToCharArray();
+            
+            for (int i = 0; i < arr.Count()-1; i++)
+            {
+                if (arr[i]==45|| str[i]==95 )
+                {
+                    arr[i + 1] -= (char)32;
+arr[0] = str[0];
+                }
+            }
+
+            string s = new string(arr).Replace("_",String.Empty).Replace("-",String.Empty);
+           
+            return s;
+        }
+}
