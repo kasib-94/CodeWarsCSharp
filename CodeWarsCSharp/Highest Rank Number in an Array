@@ -1,0 +1,37 @@
+using System;
+using System.Collections.Generic;
+using System.Linq;
+
+public class Kata
+{
+   public static int HighestRank(int[] arr)
+        {
+            Dictionary<int, int> Hash = new Dictionary<int, int>();
+
+            foreach (int num in arr)
+
+            {
+                if (Hash.ContainsKey(num))
+                {
+                    Hash[num]++;
+                }
+                else
+                {
+                    Hash.Add(num,1);
+                }
+            }
+            List<int> maxKeys = new List<int>();
+            foreach (int x in Hash.Keys)
+            {
+                if (Hash[x]==Hash.Values.Max())
+                {
+                    maxKeys.Add(x);
+                }
+            }
+
+         
+
+          return (maxKeys.Max());
+            
+        }
+}
