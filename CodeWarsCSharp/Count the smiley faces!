@@ -1,0 +1,31 @@
+using System.Linq;
+using System;
+public static class Kata
+{
+   public static int CountSmileys(string[] smileys)
+            {
+                char[] eyes = new[] { ';', ':' };
+                char[] faces = new[] { ')', 'D' };
+                char[] noses = new[] { '~', '-' };
+                int result = 0;
+                for (int i = 0; i < smileys.Length; i++)
+                {
+                    if (smileys[i].Length==2)
+                    {
+                        if (eyes.Contains(smileys[i][0])&&faces.Contains(smileys[i][1]))
+                        {
+                            result++;
+                        }
+                    }
+                    if (smileys[i].Length==3)
+                    {
+                        if (eyes.Contains(smileys[i][0])&&noses.Contains(smileys[i][1]) &&faces.Contains(smileys[i][2]))
+                        {
+                            result++;
+                        }
+                    }
+                }
+
+                return result;
+            }
+}
