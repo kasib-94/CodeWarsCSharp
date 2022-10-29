@@ -1,0 +1,16 @@
+using System;
+using System.Linq;
+using System.Collections.Generic;
+public class Scramblies
+        {
+            public static bool Scramble(string str1, string str2)
+            {
+                var xd = str1.ToCharArray().ToList();
+                foreach (var letter in str2.ToCharArray().ToList())
+                    if (xd.Contains(letter))
+                        xd.Remove(letter);
+                    else
+                        return false;
+                return true;
+            }
+        }
