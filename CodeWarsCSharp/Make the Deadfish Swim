@@ -1,0 +1,39 @@
+using System;
+using System.Collections.Generic;
+public class Deadfish
+{
+  public static int[] Parse(string data)
+  {
+     int num = 0;
+            List<int> list = new List<int>();
+            foreach (char c in data)
+            {
+                if (c == 'd')
+                {
+                    num--;
+                }
+
+                else if (c == 'i')
+                {
+                    num++;
+                }
+
+                else if (c == 's')
+                {
+                    num = (int)Math.Pow(num, 2);
+                }
+
+                else if (c == 'o')
+                {
+                    list.Add(num);
+                }
+            }
+
+            foreach (int nr in list.ToArray())
+            {
+                Console.WriteLine(nr);
+            }
+
+            return list.ToArray();
+  }
+}
