@@ -1,0 +1,21 @@
+using System;
+using System.Collections.Generic;
+using System.Linq;
+
+public class Kata {
+  public static int[] DeleteNth(int[] arr, int x) {
+   Array.Reverse(arr);
+          List<int> ints = arr.ToList();
+            for (int i = 0; i < ints.Count(); i++)
+            {
+                if (ints.Where(w => w==ints[i]).Count()>x)
+                {
+                    ints.Remove(ints[i]);
+                    i--;
+                }
+            }
+            ints.Reverse();
+            return ints.ToArray();
+
+  }
+}
