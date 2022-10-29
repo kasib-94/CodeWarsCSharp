@@ -1,0 +1,48 @@
+using System;
+using System.Collections.Generic;
+using System.Linq;
+using System.Text.RegularExpressions;
+public class TopWords
+        {
+            public static List<string> Top3(string s)
+            {
+                Console.WriteLine(s);
+                var str = s;
+                var charsToRemove = new string[] { "@", ",", ".", ";","/","*","#",@"\","-",":","?","!","_"  };
+              
+                foreach (var c in charsToRemove)
+                {
+                    str = str.Replace(c, " ");
+                }
+
+                s = str;
+                s =Regex.Replace(s, @"\s+", " ");
+                s= s.Trim();
+                s = s.ToLower();
+               
+               
+               List<string> list = s.Split(" ").ToList();
+               
+               Dictionary<string, int> dict = new Dictionary<string, int>();
+               while (list.Count!=0)
+               {
+                   dict.Add(list[0],list.Where(x=>x==list[0]).Count());
+                   string b = list[0];
+                   list.RemoveAll(x => b == x);
+               }
+               var sortedDict = from entry in dict orderby entry.Value descending select entry;
+              dict = sortedDict.ToDictionary(pair => pair.Key, pair => pair.Value);
+
+              list = dict.Keys.Take(3).ToList();
+              if (list.Count==1 )
+              {
+                  if (Regex.IsMatch(list[0], @"^[a-zA-Z]+$")==false)
+                  {
+                      list.Clear();
+                  }
+                 
+              }
+              
+                return list ;
+            }
+        }
