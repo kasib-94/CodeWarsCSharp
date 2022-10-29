@@ -1,0 +1,32 @@
+using System;
+using System.Linq;
+public static class Kata
+{
+   public static int MaxSequence(int[] arr)
+        {
+            if (arr.Length==0)
+            {
+                return 0;
+            }
+            int max = arr[0];
+            for (int j = 0; j != arr.Length;)
+            {
+                for (int i = 1; i <= arr.Length; i++)
+                {
+                    if (arr.Take(i).Sum() > max)
+                    {
+                        max = arr.Take(i).Sum();
+                    }
+                }
+
+                arr = arr.Skip(1).ToArray();
+            }
+
+            Console.WriteLine(max);
+            if (max<0)
+            {
+                return 0;
+            }
+            return max;
+        }
+}
