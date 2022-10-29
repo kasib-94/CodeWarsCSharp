@@ -1,0 +1,25 @@
+using System;
+using System.Collections.Generic;
+using System.Linq;
+public static class Kata
+{
+        public static string AlphabetPosition(string text)
+        {
+           text= text.ToUpper();   
+            char[] alpha = "ABCDEFGHIJKLMNOPQRSTUVWXYZ".ToCharArray();
+            List<int> ns = new List<int>();
+           foreach (char c in text)
+            {
+                if ((Array.IndexOf(alpha, c)!=-1))
+                {
+                    ns.Add(Array.IndexOf(alpha, c)+1);
+                }
+              
+            }
+            List<string> strings = ns.ConvertAll<string>(x => x.ToString());
+
+            Console.WriteLine(String.Join(" ", strings));
+            return String.Join(" ", strings);
+
+        }
+}
